@@ -46,6 +46,7 @@
          "requires" : {
             "Otogiri" : "0.06",
             "Otogiri::Plugin" : "0.02",
+            "Scope::Guard" : "0",
             "parent" : "0",
             "perl" : "5.008005"
          }
@@ -58,5 +59,16 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/tsucchi/p5-Otogiri-Plugin-DeflateSwitcher/issues"
+      },
+      "homepage" : "https://github.com/tsucchi/p5-Otogiri-Plugin-DeflateSwitcher",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/tsucchi/p5-Otogiri-Plugin-DeflateSwitcher.git",
+         "web" : "https://github.com/tsucchi/p5-Otogiri-Plugin-DeflateSwitcher"
+      }
+   },
    "version" : "0.01"
 }

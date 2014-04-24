@@ -45,6 +45,70 @@ subtest 'disable_deflate', sub {
     is( $deflate_called, 0);
 };
 
+subtest 'enable_deflate with guard previous disabled', sub {
+    my ($db, $id) = prepare();
+
+    $db->disable_deflate;
+    {
+        my $guard = $db->enable_deflate;
+        $db->fast_insert('person', {
+            name => 'Sherlock Shellingford',
+            age  => 15,
+        });
+        is( $deflate_called, 1);
+    }
+    my $row = $db->single('person', { id => $id });
+    is( $deflate_called, 1); #deflate is now disabled
+};
+
+subtest 'enable_deflate with guard previous enabled', sub {
+    my ($db, $id) = prepare();
+
+    $db->enable_deflate;
+    {
+        my $guard = $db->enable_deflate;
+        $db->fast_insert('person', {
+            name => 'Sherlock Shellingford',
+            age  => 15,
+        });
+        is( $deflate_called, 1);
+    }
+    my $row = $db->single('person', { id => $id });
+    is( $deflate_called, 2);
+};
+
+subtest 'disable_deflate with guard previous disabled', sub {
+    my ($db, $id) = prepare();
+
+    $db->disable_deflate;
+    {
+        my $guard = $db->disable_deflate;
+        $db->fast_insert('person', {
+            name => 'Sherlock Shellingford',
+            age  => 15,
+        });
+        is( $deflate_called, 0);
+    }
+    my $row = $db->single('person', { id => $id });
+    is( $deflate_called, 0);
+};
+
+subtest 'disable_deflate with guard previous enabled', sub {
+    my ($db, $id) = prepare();
+
+    $db->enable_deflate;
+    {
+        my $guard = $db->disable_deflate;
+        $db->fast_insert('person', {
+            name => 'Sherlock Shellingford',
+            age  => 15,
+        });
+        is( $deflate_called, 0);
+    }
+    my $row = $db->single('person', { id => $id });
+    is( $deflate_called, 1);
+};
+
 
 done_testing;
 

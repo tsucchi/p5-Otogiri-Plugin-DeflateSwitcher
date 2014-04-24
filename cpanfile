@@ -2,6 +2,7 @@ requires 'Otogiri', '0.06';
 requires 'Otogiri::Plugin', '0.02';
 requires 'parent';
 requires 'perl', '5.008005';
+requires 'Scope::Guard';
 
 on configure => sub {
     requires 'CPAN::Meta';
