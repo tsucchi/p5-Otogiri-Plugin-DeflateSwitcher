@@ -57,7 +57,10 @@ subtest 'enable_deflate with guard previous disabled', sub {
         });
         is( $deflate_called, 1);
     }
-    my $row = $db->single('person', { id => $id });
+    $db->fast_insert('person', {
+        name => 'Cordelia Glauca',
+        age  => 17,
+    });
     is( $deflate_called, 1); #deflate is now disabled
 };
 
@@ -73,7 +76,10 @@ subtest 'enable_deflate with guard previous enabled', sub {
         });
         is( $deflate_called, 1);
     }
-    my $row = $db->single('person', { id => $id });
+    $db->fast_insert('person', {
+        name => 'Cordelia Glauca',
+        age  => 17,
+    });
     is( $deflate_called, 2);
 };
 
@@ -89,7 +95,10 @@ subtest 'disable_deflate with guard previous disabled', sub {
         });
         is( $deflate_called, 0);
     }
-    my $row = $db->single('person', { id => $id });
+    $db->fast_insert('person', {
+        name => 'Cordelia Glauca',
+        age  => 17,
+    });
     is( $deflate_called, 0);
 };
 
@@ -105,7 +114,10 @@ subtest 'disable_deflate with guard previous enabled', sub {
         });
         is( $deflate_called, 0);
     }
-    my $row = $db->single('person', { id => $id });
+    $db->fast_insert('person', {
+        name => 'Cordelia Glauca',
+        age  => 17,
+    });
     is( $deflate_called, 1);
 };
 
